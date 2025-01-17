@@ -30,7 +30,6 @@ public class MaxSubarrayBruteForce {
                 maxSum = Math.max(maxSum, currentSum);
             }
         }
-
         return maxSum;
     }
 }

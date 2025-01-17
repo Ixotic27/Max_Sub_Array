@@ -1,0 +1,44 @@
+import java.util.Scanner;
+
+public class MaxSubarrayKadanes {
+    public static void main(String[] args) {
+        try (Scanner sc = new Scanner(System.in)) {
+            System.out.print("Enter the size of the array: ");
+            int n = sc.nextInt();
+            System.out.println("Enter the elements of the array: ");
+            int[] ar = new int[n];
+
+            for (int i = 0; i < n; i++) {
+                ar[i] = sc.nextInt();
+            }
+
+            System.out.println("Maximum Subarray Sum using Kadane's Algorithm: " + maxSubarrayKadanes(ar));
+        }
+    }
+
+    // Kadane's Algorithm (Including Special Case for All Negative Elements)
+    private static int maxSubarrayKadanes(int[] ar) {
+        int maxSum = Integer.MIN_VALUE;
+        int currentSum = 0;
+        boolean allNegative = true;
+
+        for (int i = 0; i < ar.length; i++) {
+            int num = ar[i];
+            if (num > 0) {
+                allNegative = false;
+            }
+            currentSum = Math.max(num, currentSum + num);
+            maxSum = Math.max(maxSum, currentSum);
+        }
+
+        if (allNegative) {
+            // If all elements are negative, return the maximum element
+            maxSum = Integer.MIN_VALUE;
+            for (int i = 0; i < ar.length; i++) {
+                maxSum = Math.max(maxSum, ar[i]);
+            }
+        }
+
+        return maxSum;
+    }
+}
